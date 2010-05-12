@@ -1,0 +1,118 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf290
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww17560\viewh16560\viewkind0
+\pard\tx846\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\f0\b\fs24 \cf0 +	add to current cell\
++(n)	add n to current cell\
++(*n)	add value of cell n\
+\pard\tx846\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+\cf0 +(&n)	add value of cell relative n
+\b0 \
+
+\b +(s)	add value of cell named s\
+\pard\tx846\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b0 \cf0 \
+\pard\tx846\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b \cf0 -	subtract from current cell\
+-(n)	subtract n from current cell\
+-(*n)	subtract value of cell n\
+-(&n)	subtract value of cell relative n
+\b0 \
+
+\b -(s)	subtract value of cell named s\
+\pard\tx846\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b0 \cf0 \
+
+\b <	go left one cell\
+<(n)	go left n cells\
+<(*n)	go left value of cell n
+\b0 \
+\pard\tx846\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b \cf0 <(s)	go left value of cell named s\
+\pard\tx846\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b0 \cf0 \
+\pard\tx846\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b \cf0 >	go right one cell\
+>(n)	go right n cells\
+>(*n)	go right value of cell n
+\b0 \
+
+\b >(s)	go right value of cell named s\
+
+\b0 \
+\
+
+\b ^	go to cell of current address\
+^(n)	go to cell n\
+^(*n)	go to value of cell n\
+^(s)	go to cell named s\
+
+\b0 \
+
+\b v(*n)	copy current mem address into cell\
+v(s)	name current cell\
+
+\b0 \
+
+\b c	set current cell to 0\
+c(n)	set current cell to n\
+c(*n)	set cell n to 0\
+c(s)	write string to cell (not cell name!)\
+
+\b0 \
+
+\b [	jump past ] if the value under the current cell is 0\
+]	jump back to ] if the current cell value is nonzero
+\b0 \
+\
+
+\b .	output current cell under pointer\
+.(*n)	output current cell to file handle in cell n\
+!	output current cell as number\
+!(n)	output current cell as number\
+,	read in current cell to pointer\
+,(*n)	read in from file handle in cell n\
+
+\b0 \
+\
+'(*n)	open file handle at string starting at s\
+
+\b "(*n)	open file handle to hostname and port in string at n\
+
+\b0 \
+\{	define procedure numbered with current cell value\
+\}	return to program\
+\
+:	jump to procedure numbered in current cell\
+:(s)	jump to procedure numbered in named cell\
+\
+j	jump to pointer in current cell\
+j(n)	jump n instructions\
+\
+
+\b @	exit with current cell as exit value\
+\
+\
+tips: (&n) is accepted anywhere (*n) is.\
+\
+
+\b0 Goals of BF++:\
+1. Language must still be innately recognisable as BrainF**k. It must feel like coding BrainF**k.\
+\
+2. Remove all the tedious bits. Yes, we know you can put 81 +es in a row. Yes, we know you can factorize the number and use ++++++++[>+++++<-].  You couldd also look the number up on http://esolangs.org/wiki/Brainfuck_constants. Yes, it is tedious - but tediousness at such a low level is not what this is about - there are better things to get stuck on how to implement. Hello World is now simpler to implement, but you could have generated all the +-[]ing with a program.\
+\
+3. There are plenty of BrainF**k derivatives that make it harder to code, like BoolF**k like where you only operate on bits. This is not the goal here.\
+\
+4. Add things that make it almost but not quite usable. If you just can't implement something reasonably, nobody will try. But it's more fun to just have it sitting right on the edge such that it's almost easy... but just that little bit harder than you want to go. Tempt people in with strings and sockets... but trap them in the rest. Programming is like a challenge now. So this means adding string support.\
+\
+5. Also add stuff that makes it possible to write serious apps in it. Console IO is just not enough. So there's file I/O and network sockets.\
+\
+6. Finally, make the expense of 3 + signs worth it, as someone has already made BrainF*ck++, and this adds more. And annoys people when what looks like line noise spits out the HTML source to their homepage.}
