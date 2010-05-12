@@ -9,7 +9,7 @@ program = f.read()
 
 ptr = 0
 memptr = 0
-mem = [0]*3000000
+mem = [0]*30000
 bktstack = []
 namedcells = {}
 
@@ -192,7 +192,28 @@ while ptr < len(program):
 		elif (intype == type_name):
 			error("tcp/ip handle open not implemented")	
 	elif instruction == '[':
-		bktstack.extend([ptr])
+		closeptr = ptr
+		bktdepth = 1
+		while bktdepth:
+			closeptr += 1
+			a = program[closeptr]
+			if a == '[': bktdepth += 1
+			elif a == ']': bktdepth -= 1
+		if (program[closeptr+1] == '('):
+			if (program[closeptr+2] == "*"):
+				i = closeptr+2
+				while (program[i] != ")"):
+					i+=1
+				check = int(program[closeptr+3:i])
+				if (mem[check] > 0):
+					bktstack.extend([ptr])
+				else:
+					ptr = i
+		else:
+			if (mem[memptr] > 0):
+				bktstack.extend([ptr])
+			else:
+				ptr = closeptr-1 # actually this steps onto the ] but then the instruction decoder skips params
 	elif instruction == ']':
 		if (intype == type_direct):
 			if mem[memptr] > 0:
@@ -200,6 +221,12 @@ while ptr < len(program):
 		elif (intype == type_pointer):
 			if mem[param] > 0:
 				ptr = bktstack.pop() - 1
+		elif (intype == type_name):
+			error("triggers a bug, don't do this yet")
+			#if mem[namedcells[param]] > 0:
+			#	ptr = bktstack.pop() - 1
+		elif (intype == type_param):
+			error("not a valid instruction")
 		
 	#########################################################
 	elif instruction == '@':
@@ -219,7 +246,7 @@ while ptr < len(program):
 		linen += 1
 	#########################################################
 	else:
-		print "unknown instruction %s" % instruction
+		print "unknown instruction %s on line %i, ptr %i" % (instruction, linen, ptr)
 	ptr += 1
 
 print ""
