@@ -199,21 +199,27 @@ while ptr < len(program):
 			a = program[closeptr]
 			if a == '[': bktdepth += 1
 			elif a == ']': bktdepth -= 1
-		if (program[closeptr+1] == '('):
-			if (program[closeptr+2] == "*"):
-				i = closeptr+2
-				while (program[i] != ")"):
-					i+=1
-				check = int(program[closeptr+3:i])
-				if (mem[check] > 0):
-					bktstack.extend([ptr])
-				else:
-					ptr = i
-		else:
+		if ((closeptr + 2) > len(program)): # if the check for ()s on the ] falls off the end of the program, there aren't any
 			if (mem[memptr] > 0):
 				bktstack.extend([ptr])
 			else:
-				ptr = closeptr-1 # actually this steps onto the ] but then the instruction decoder skips params
+				ptr = closeptr-1
+		else:
+			if (program[closeptr+1] == '('):
+				if (program[closeptr+2] == "*"):
+					i = closeptr+2
+					while (program[i] != ")"):
+						i+=1
+					check = int(program[closeptr+3:i])
+					if (mem[check] > 0):
+						bktstack.extend([ptr])
+					else:
+						ptr = i
+			else:
+				if (mem[memptr] > 0):
+					bktstack.extend([ptr])
+				else:
+					ptr = closeptr-1 # actually this steps onto the ] but then the instruction decoder skips params
 	elif instruction == ']':
 		if (intype == type_direct):
 			if mem[memptr] > 0:
