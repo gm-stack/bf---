@@ -247,10 +247,19 @@ while ptr < len(program):
 	#########################################################
 	elif instruction == ' ':
 		sys.stdout.write(' ')
+	elif instruction == '#':
+		while ((program[ptr] != '\n') and not ((ptr + 2) > len(program))):
+			ptr = ptr + 1
+		if ((ptr + 2) > len(program)): # this complex mess is needed not to break the line number program
+			print ""
+			exit(0)
+		ptr -= 1
 	#########################################################
 	elif instruction == '\n':
 		linen += 1
 	#########################################################
+	elif instruction in ['\t']:
+		pass
 	else:
 		print "unknown instruction %s on line %i, ptr %i" % (instruction, linen, ptr)
 	ptr += 1
